@@ -1,0 +1,218 @@
+\documentclass[letterpaper,10pt,titlepage]{report}
+%% ------------------------------------------------------------------------- %%
+%% Document Setup
+\usepackage[margin=0.7in]{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{pdfpages}
+\usepackage{multicol}
+\usepackage{lastpage}
+\usepackage{dirtytalk}
+\usepackage{graphicx}
+\graphicspath{ {images/} }         % Make sure you put all images in images/
+\usepackage[margin=0.5in]{caption} % Allows use of \caption* for empty captions
+\usepackage{mdframed}
+\usepackage{enumitem}
+%\pagenumbering{gobble}
+\usepackage{bm}
+
+%% Math
+\usepackage{amsmath}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+\usepackage{empheq}
+\usepackage{esint}
+\usepackage{mathcomp}
+
+%% Symbols
+\usepackage{siunitx}
+\sisetup{load-configurations = abbreviations}
+%\usepackage{amssymb}
+%\usepackage{gensymb}
+
+%% Tikz, plotting libraries,
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings,arrows, calc, angles, quotes, decorations.pathmorphing,patterns, decorations.pathreplacing}
+\tikzset{>=latex}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% The following code is good for doing Theorem and definition style blocks.
+%% ------------------------------------------------------------------------- %%
+%\begin{mdframed}[backgroundcolor=gray!20]
+%\end{mdframed}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Essential newcommands
+%% ------------------------------------------------------------------------- %%
+% \sn: scientific notation
+\newcommand{\sn}[2]{#1\times10^{#2}}
+% \functionof: \functionof{f}{t, x} = f(t, x)
+\newcommand{\functionof}[2]{#1\left(#2\right)}
+% \unit: makes a unit vector symbol out of the argument
+\newcommand{\unit}[1]{\,\hat{\bm{#1}}}
+% \vect: makes a bold vector
+\newcommand{\vect}[1]{\mathbf{#1}}
+% \units: this thing is great for writing units inside of math mode
+\newcommand{\units}[1]{\,\text{#1}}
+% \fracunits: this thing is great for writing units that must be in fractions
+%     - The first argument is either \frac or \dfrac, depending on which
+%     fractional style you want. I assume you could also use other fractional
+%     styles
+\newcommand{\fracunits}[3]{#1{\units{#2}}{\units{#3}}}
+
+% The following commands are easier than writing \left( and \right)
+% Instead, just write \paren{arg}, \brackets{arg}, etc.
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\brackets}[1]{\left[#1\right]}
+\newcommand{\anglers}[1]{\langle #1 \rangle}
+
+% The following commands add parentheses to the original commands, or just make
+% them work like I think they should work.
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\factorial}[1]{#1!}
+\newcommand{\factorialp}[1]{\factorial{\paren{#1}}}
+\newcommand{\lnp}[1]{\ln{\paren{#1}}}
+\newcommand{\logten}[1]{\log_{10}\paren{#1}}
+\newcommand{\sinp}[1]{\sin{\paren{#1}}}
+\newcommand{\cosp}[1]{\cos{\paren{#1}}}
+\newcommand{\tanp}[1]{\tan{\paren{#1}}}
+\newcommand{\expp}[1]{\exp\paren{#1}}
+\newcommand{\integral}[2]{\int_{#1}^{#2}}
+\newcommand{\summ}[2]{\sum_{#1}^{#2}}
+\newcommand{\deriv}[2]{\dfrac{d #1}{d #2}}
+
+\newcommand{\degrees}[1]{\,\degree\units{#1}}
+
+% some physics specific symbols (I need to find better symbols)
+\newcommand{\lagr}{\mathcal{L}}
+\newcommand{\ham}{\mathcal{H}}
+
+% Some partial derivative commands that were useful during E&M
+\newcommand{\partialwoa}[1]{\dfrac{\partial}{\partial #1}}
+\newcommand{\partiald}[2]{\dfrac{\partial}{\partial #2}\brackets{#1}}
+\newcommand{\partialdd}[2]{\dfrac{\partial^2}{\partial^2 #2}\brackets{#1}}
+
+% I think this is a triple integral over a whole sphere
+\newcommand{\tsi}[1]{\int_{\phi=0}^{2\pi}\int_{\theta=0}^{\pi}\int_{r=0}^{#1}}
+
+% Some oddly specific stuff that I've been compiling over time.
+\newcommand{\onec}{\frac{1}{\degree\text{C}}}
+\newcommand{\cunits}{\,\frac{\units{J}}{\units{kg}\cdot\degrees{C}}}
+\newcommand{\idcunits}{\,\frac{\units{J}}{\units{mol}\cdot\text{K}}}
+\newcommand{\idc}{8.3145\,\frac{\units{J}}{\units{mol}\cdot\text{K}}}
+\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% New Environments
+%% ------------------------------------------------------------------------- %%
+%\newcounter{problem}
+\newenvironment{problem}[3]{
+    \clearpage
+    \setcounter{equation}{0}
+    \phantomsection
+    \addcontentsline{toc}{section}{Problem #1}
+    \noindent{\LARGE\textbf{Problem #1}}
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=gray!20]
+        \vspace{6pt}
+        #2
+        \vspace{6pt}
+    \end{mdframed}
+    #3
+}
+{}
+
+\newenvironment{solution}{
+    \vspace{2em}
+    \noindent
+    {\Large\textbf{Solution}}\vspace{0.5em}\\
+}
+{}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Document Information
+%%     These are used in several places
+%% ------------------------------------------------------------------------- %%
+\newcommand{\theTitle}{Name of Assignment}
+\newcommand{\theDueDate}{Due Date}
+\newcommand{\theClass}{Class Number}
+\newcommand{\theClassName}{Class Name}
+\newcommand{\theClassInstructor}{Dr. Professor}
+\newcommand{\theAuthorName}{Your Name}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Title page stuff
+%% ------------------------------------------------------------------------- %%
+\title{\theTitle\\
+\theClass: \theClassName\\
+}
+\author{\theAuthorName}
+\date{\theDueDate}
+%% ------------------------------------------------------------------------- %%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+%% ------------------------------------------------------------------------- %%
+% The following makes equations look much nicer
+\setlength{\abovedisplayskip}{10pt}
+\setlength{\belowdisplayskip}{10pt}
+\setlength{\abovedisplayshortskip}{10pt}
+\setlength{\belowdisplayshortskip}{10pt}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Additional pages of content that are given somewhere
+%%     Comment out when not using to avoid problems...
+%% ------------------------------------------------------------------------- %%
+%\includepdf[pages=-]{addiontial_content.pdf}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Header stuff
+%% ------------------------------------------------------------------------- %%
+\topmargin=-0.45in
+\headsep=0.25in
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\theAuthorName}
+\rhead{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\chead{\theClass\ (\theClassInstructor): \theTitle}
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Document Specific new commands
+%%     - I like to put newcommands here that I probably won't use again
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+
+%% ------------------------------------------------------------------------- %%
+%% Problems
+%% ------------------------------------------------------------------------- %%
+\begin{problem}{1}
+    {
+        Problem text goes here!
+    }
+    {
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.5\linewidth]{birb.jpg}
+            \caption{This is the caption.}
+        \end{figure}
+    }
+    \begin{solution}
+        Problem solution goes here
+    \end{solution}
+\end{problem}
+%% ------------------------------------------------------------------------- %%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
