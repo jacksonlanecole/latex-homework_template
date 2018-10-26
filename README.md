@@ -1,2 +1,1 @@
-# homework
-
+# latex-homework_template
