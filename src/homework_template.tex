@@ -1,6 +1,7 @@
-\documentclass[letterpaper,10pt,titlepage]{report}
-%% ------------------------------------------------------------------------- %%
-%% Document Setup
+\documentclass[letterpaper, 10pt, titlepage]{report}
+% --------------------------------------------------------------------------- %
+% Document Setup
+% --------------------------------------------------------------------------- %
 \usepackage[margin=0.7in]{geometry}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
@@ -16,7 +17,7 @@
 %\pagenumbering{gobble}
 \usepackage{bm}
 
-%% Math
+% Math
 \usepackage{amsmath}
 \usepackage{mathtools}
 \mathtoolsset{showonlyrefs}
@@ -24,30 +25,37 @@
 \usepackage{esint}
 \usepackage{mathcomp}
 
-%% Symbols
+% Symbols
 \usepackage{siunitx}
 \sisetup{load-configurations = abbreviations}
 %\usepackage{amssymb}
 %\usepackage{gensymb}
 
-%% Tikz, plotting libraries,
+% Tikz, plotting libraries,
 \usepackage{tikz}
-\usetikzlibrary{decorations.markings,arrows, calc, angles, quotes, decorations.pathmorphing,patterns, decorations.pathreplacing}
+\usetikzlibrary{
+    decorations.markings,
+    arrows,
+    calc,
+    angles,
+    quotes,
+    decorations.pathmorphing,patterns,
+    decorations.pathreplacing}
 \tikzset{>=latex}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% The following code is good for doing Theorem and definition style blocks.
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% The following code is good for doing Theorem and definition style blocks.
+% --------------------------------------------------------------------------- %
 %\begin{mdframed}[backgroundcolor=gray!20]
 %\end{mdframed}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Essential newcommands
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Essential newcommands
+% --------------------------------------------------------------------------- %
 % \sn: scientific notation
 \newcommand{\sn}[2]{#1\times10^{#2}}
 % \functionof: \functionof{f}{t, x} = f(t, x)
@@ -105,14 +113,14 @@
 \newcommand{\idcunits}{\,\frac{\units{J}}{\units{mol}\cdot\text{K}}}
 \newcommand{\idc}{8.3145\,\frac{\units{J}}{\units{mol}\cdot\text{K}}}
 \newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% New Environments
-%% ------------------------------------------------------------------------- %%
-%\newcounter{problem}
+% --------------------------------------------------------------------------- %
+% New Environments
+% --------------------------------------------------------------------------- %
 \newenvironment{problem}[3]{
     \clearpage
+    \chead{\theClass: #1}
     \setcounter{equation}{0}
     \phantomsection
     \addcontentsline{toc}{section}{Problem #1}
@@ -133,51 +141,50 @@
     {\Large\textbf{Solution}}\vspace{0.5em}\\
 }
 {}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Document Information
-%%     These are used in several places
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Document Information
+%     These are used in several places
+% --------------------------------------------------------------------------- %
 \newcommand{\theTitle}{Name of Assignment}
 \newcommand{\theDueDate}{Due Date}
 \newcommand{\theClass}{Class Number}
 \newcommand{\theClassName}{Class Name}
 \newcommand{\theClassInstructor}{Dr. Professor}
 \newcommand{\theAuthorName}{Your Name}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Title page stuff
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Title page stuff
+% --------------------------------------------------------------------------- %
 \title{\theTitle\\
 \theClass: \theClassName\\
 }
 \author{\theAuthorName}
 \date{\theDueDate}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 % The following makes equations look much nicer
 \setlength{\abovedisplayskip}{10pt}
 \setlength{\belowdisplayskip}{10pt}
 \setlength{\abovedisplayshortskip}{10pt}
 \setlength{\belowdisplayshortskip}{10pt}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Additional pages of content that are given somewhere
-%%     Comment out when not using to avoid problems...
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Additional pages of content that are given somewhere
+%     Comment out when not using to avoid problems...
+% --------------------------------------------------------------------------- %
 %\includepdf[pages=-]{addiontial_content.pdf}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Header stuff
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Header stuff
+% --------------------------------------------------------------------------- %
 \topmargin=-0.45in
 \headsep=0.25in
 
@@ -185,19 +192,19 @@
 \fancyhf{}
 \lhead{\theAuthorName}
 \rhead{Page \thepage \hspace{1pt} of \pageref{LastPage}}
-\chead{\theClass\ (\theClassInstructor): \theTitle}
-%% ------------------------------------------------------------------------- %%
+% \chead{\theClass\ (\theClassInstructor): \theTitle}
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Document Specific new commands
-%%     - I like to put newcommands here that I probably won't use again
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Document Specific new commands
+%     - I like to put newcommands here that I probably won't use again
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 
-%% ------------------------------------------------------------------------- %%
-%% Problems
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
+% Problems
+% --------------------------------------------------------------------------- %
 \begin{problem}{1}
     {
         Problem text goes here!
@@ -213,6 +220,5 @@
         Problem solution goes here
     \end{solution}
 \end{problem}
-%% ------------------------------------------------------------------------- %%
+% --------------------------------------------------------------------------- %
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
