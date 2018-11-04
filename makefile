@@ -4,7 +4,7 @@ BUILDDIR := build
 SOURCES  := $(shell find $(SRCDIR) -type f -name \*.$(SRCEXT))
 
 SRCEXT   := tex
-TEXSRCS := $(shell find $(SRCDIR) -type f -name \*.$(SRCEXT))
+TEXSRCS := $(shell find $(SRCDIR) -maxdepth 1 -type f -name \*.$(SRCEXT))
 TEXBUILDDIRS = build
 PDFDOCS = $(shell find $(TEXBUILDDIRS) -type f -name \*.pdf)
 PDFDOCSDIR := pdf
@@ -13,8 +13,7 @@ RM = rm -rf
 
 
 docs: $(TEXSRCS)
-	@latexmk -pdf -use-make -outdir=build \
-		-xelatex $(TEXSRCS)
+	@latexmk -pdf -cd -use-make -outdir=build -xelatex $(TEXSRCS)
 	@make movepdfs
 	@$(RM) $(TEXBUILDDIRS)
 
