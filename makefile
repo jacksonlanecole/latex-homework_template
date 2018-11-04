@@ -13,7 +13,7 @@ RM = rm -rf
 
 
 docs: $(TEXSRCS)
-	@latexmk -pdf -cd -use-make -outdir=build -xelatex $(TEXSRCS)
+	@latexmk -pdf -cd -use-make -outdir=build -pdflatex="pdflatex" $(TEXSRCS)
 	@make movepdfs
 	@$(RM) $(TEXBUILDDIRS)
 
